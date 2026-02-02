@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 int checkscore(char std[]);
+int countNo1Correct(char ans[][10], int n);
 
 char keys[10] = {'D','B','D','C','C','D','A','E','A','D'};
 
@@ -16,10 +17,10 @@ int main() {
         {'B','B','A','C','C','D','E','E','A','D'}, //7
         {'E','B','E','C','C','D','E','E','A','D'}  //7
     };
-
-    for(i = 0; i < 8; i++) {
-        printf("std %d => %d\n", (i+1), checkscore(ans[i]));
-    }
+     printf("Number of students correct in No.1 = %d\n",
+        countNo1Correct(ans, 8));
+       
+    
 
     return 0;
 }
@@ -37,4 +38,15 @@ int checkscore(char std[]) {
     return score;
 }
 
+int countNo1Correct(char ans[][10], int n) {
+    int i, count = 0;
 
+    for(i = 0; i < n; i++) {
+        if(ans[i][0] == keys[0]) {
+            count++;
+        }
+    }
+
+    return count;
+    
+}
