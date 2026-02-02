@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 int checkscore(char std[]);
-int countNo1Correct(char ans[][10], int n);
+int hardestQuestion(char ans[][10], int n);
 
 char keys[10] = {'D','B','D','C','C','D','A','E','A','D'};
 
@@ -17,9 +17,8 @@ int main() {
         {'B','B','A','C','C','D','E','E','A','D'}, //7
         {'E','B','E','C','C','D','E','E','A','D'}  //7
     };
-     printf("Number of students correct in No.1 = %d\n",
-        countNo1Correct(ans, 8));
-       
+    printf("Hardest question is No.%d\n",
+        hardestQuestion(ans, 8));
     
 
     return 0;
@@ -38,15 +37,25 @@ int checkscore(char std[]) {
     return score;
 }
 
-int countNo1Correct(char ans[][10], int n) {
-    int i, count = 0;
+int hardestQuestion(char ans[][10], int n) {
+    int i, j;
+    int minCorrect = n + 1;
+    int hardest = 0;
 
-    for(i = 0; i < n; i++) {
-        if(ans[i][0] == keys[0]) {
-            count++;
+    for (j = 0; j < 10; j++) {   
+        int count = 0;
+
+        for (i = 0; i < n; i++) {   
+            if (ans[i][j] == keys[j]) {
+                count++;
+            }
+        }
+
+        if (count < minCorrect) {
+            minCorrect = count;
+            hardest = j;
         }
     }
 
-    return count;
-    
+    return hardest + 1; 
 }
